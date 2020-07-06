@@ -148,3 +148,23 @@ ggplot(data=df_mpg, aes(x=reorder(drv, mean_cty),  y=mean_cty))+geom_col(fill=ra
 ggplotly(tt)
 
 ggplot(data=mpg, aes(x=displ, y=hwy)) + geom_point()
+ggplot(data = mpg, aes(x = displ, y = hwy))+geom_point()+xlim(3, 6)+ylim(10, 20)
+
+midwest=as.data.frame(ggplot2::midwest)
+midwest
+ggplot(data=midwest, aes(x=poptotal, y=popasian))+geom_point()+xlim(0, 5000000)+ylim(0, 10000)
+
+kk=table(mpg$class)
+tt=barplot(kk, col=rainbow(8), ylim=c(0, 70))
+text(tt, kk, paste0(kk, "대"), pos=3, col=2, cex=2)
+mpg %>% 
+  filter(class=="suv") %>% 
+group_by(manufacturer) %>% 
+  summarise(mean_cty=mean(cty),
+            mean_hwy=mean(hwy)) %>% 
+  arrange(desc(mean_hwy)) %>% 
+  head(5)
+
+df
+ggplot(data=df, aes(x=manufacturer, y=mean_cty))+geom_col(fill=rainbow(5))+coord_flip()+xlab("차종")+ylab('평균도시연비');
+
