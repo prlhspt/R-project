@@ -100,7 +100,7 @@ summary(exam)
 boxplot(exam$math)
 hist(exam$math)
 boxplot(exam$math, horizontal = T)
-boxplot(exam$math, horizontal = T, col=2#color)
+boxplot(exam$math, horizontal = T, col=2 #color)
 
 x=sample(0:100, 80, replace = T)
 plot(x, pch=ifelse(x>=60, 10, 20), col=ifelse(x>=60, 2, 5))
