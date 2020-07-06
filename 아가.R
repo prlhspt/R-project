@@ -1,15 +1,24 @@
-setwd("c:/Rdata")
+install.packages("multilinguer")
+library(multilinguer)
+install_jdk()
+install.packages(c('stringr', 'hash', 'tau', 'Sejong', 'RSQLite', 'devtools'), 
+                 type = "binary")
+install.packages("remotes")
+remotes::install_github('haven-jeon/KoNLP', upgrade = "never", 
+                        INSTALL_opts=c("--no-multiarch"))
+library(KoNLP) #ÃÖÁ¾ÀûÀ¸·Î "KoNLP" ÆÐÅ°Áö¸¦ ºÒ·¯¿É´Ï´Ù
+
+setwd("C:/Users/LimHyunSeok/Documents/workspace/R-project/Rdata")
 library(rvest)
 library(stringr)
 library(dplyr)
 library(ggplot2)
 library(wordcloud)
-install.packages("wordcloud2")
 library(wordcloud2)
 
 cnt=c()
-b_url="https://www.bskorea.or.kr/bible/korbibReadpage.php?version=GAE&book=gen&chap="
-for(i in 1:50){
+b_url="https://www.bskorea.or.kr/bible/korbibReadpage.php?version=GAE&book=sng&chap="
+for(i in 1:8){
   cr_url=paste0(b_url,i)
   t_css="#tdBible1 span"
   hdoc=read_html(cr_url,encoding = "UTF-8")
@@ -21,8 +30,8 @@ for(i in 1:50){
   cnt_part
   cnt=c(cnt,cnt_part)
 }
-library(KoNLP)
-txt=sapply(cnt,extractNoun,USE.NAMES = F)
+
+txt=sapply(cnt, extractNoun, USE.NAMES = F)
 txt=unlist(txt)
 count=Filter(function(x){nchar(x)>=2},txt)
 word=table(count)
@@ -30,7 +39,7 @@ word=table(count)
 kk=head(sort(word,decreasing = T),20)
 kk
 tt=barplot(kk,col=rainbow(20),ylim=c(0,300),las=2)
-text(tt,kk,label=paste0(kk,"ê°œ"),pos=3,col=2)
+text(tt,kk,label=paste0(kk,"°³"),pos=3,col=2)
 
 library(RColorBrewer)
 display.brewer.all()
@@ -46,3 +55,4 @@ wordcloud(names(word),
 wordcloud2(data=word,
            size=0.4,
            shape='diamond')
+
