@@ -1,4 +1,4 @@
-setwd("c:/Rdata")
+setwd("C:/Users/LimHyunSeok/Documents/workspace/R-project/Rdata")
 View(attitude)
 cov(attitude)
 cor(attitude)
@@ -66,4 +66,5 @@ out_cp=lm(rating~complaints+learning,data=attitude)
 summary(out_cp)
 plot(leaps,scale="adjr2")
 out_adjr=lm(rating~complaints+learning+advance,data=attitude)
+
 summary(out_adjr)
