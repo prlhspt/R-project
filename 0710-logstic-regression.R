@@ -1,0 +1,5 @@
+setwd(("D:/R-workspace/RData"))
+data=read.csv("programming.csv")
+head(data)
+model=glm(Success ~ Experience, familiy = binomial(logit), data = data)
+summary(model)
