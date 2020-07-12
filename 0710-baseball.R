@@ -1,4 +1,4 @@
-setwd("D:/workspace/r/Rdata")
+setwd("C:/Users/LimHyunSeok/Documents/workspace/R-project/Rdata")
 View(attitude)
 cov(attitude)
 cor(attitude)
@@ -12,7 +12,7 @@ out=lm(dist~speed, data=data)
 summary(out)
 
 
-data=read.csv("programming.csv")
+data=read.csv("salary.csv")
 head(data)
 out=lm(salary~experience+score, data=data)
 
@@ -41,7 +41,7 @@ biplot
 
 install.packages("aplpack")
 library(aplpack)
-# ë‹¤ë³€ëŸ‰ ì—°ìŠµ ë¬¸ì œ
+# ?‹¤ë³€?Ÿ‰ ?—°?Šµ ë¬¸ì œ
 data = read.csv("20140528_baseball.csv")
 head(data)
 rownames(data)=data[,1]
@@ -54,11 +54,11 @@ faces(data[,2:6])
 #2.
 bb2013=read.csv("2013_baseball.csv")
 head(bb2013)
-position=bb2013$í¬ì§€ì…˜
+position=bb2013$?¬ì§€?…˜
 head(position)
 
 base2_pos = bb2013[, c(2, 4:11)]
-base2_pos2 = aggregate(base2_pos[, 2:9], by = list(í¬ì§€ì…˜=base2_pos$í¬ì§€ì…˜), sum)
+base2_pos2 = aggregate(base2_pos[, 2:9], by = list(?¬ì§€?…˜=base2_pos$?¬ì§€?…˜), sum)
 head(base2_pos2)
 rownames(base2_pos2) = base2_pos2[, 1]
 head(base2_pos2)
@@ -66,8 +66,8 @@ library(lattice)
 parallel(~bb2013[,4:11]|position.horizontal, axis=F, col1)
 parallel(base2_pos2[,  2:9], horizontal.axis=F, col=1)
 
-# íŒ€ë³„ í‰í–‰ ì¢Œí‘œ
-team = bb2013$íŒ€
+# ??€ë³? ?‰?–‰ ì¢Œí‘œ
+team = bb2013$??€
 head(team)
 parallel(~bb2013[, 4:11]|team.horizontal, axis=F, col1)
 

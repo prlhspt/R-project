@@ -68,3 +68,4 @@ plot(leaps,scale="adjr2")
 out_adjr=lm(rating~complaints+learning+advance,data=attitude)
 
 summary(out_adjr)
+
