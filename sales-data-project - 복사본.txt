@@ -49,9 +49,9 @@ plot(health$QTY~health$HOLIDAY)
 install.packages("corrplot")
 library(corrplot)
 
-health_cor <- cor(he[, 5:10])
-fruit_cor <- cor(fr[, 5:10])
-tea_cor <- cor(te[, 5:10])
+health_cor <- cor(health[, 5:10])
+fruit_cor <- cor(fruit[, 5:10])
+tea_cor <- cor(tea[, 5:10])
 
 pairs(health_cor, panel=panel.smooth)
 corrplot(health_cor, method="number")
@@ -90,38 +90,3 @@ importance(rf.fit)
 rf.yhat <- predict(rf.fit, newdata=he_test)
 mean((rf.yhat-he_test$QTY)^2)
 
-states <- as.data.frame(state.x77[,c("Murder", "Population",
-                                     "Illiteracy", "Income", "Frost")])
-class(states)
-leaps <-regsubsets(Murder ~ ., data=states, nbest=4)
-plot(leaps, scale="adjr2")
-
-
-cor(he$QTY, he$SALEDAY)
-cor(he$QTY, he$PRICE)
-
-lm(he$QTY~he$SALEDAY)
-
-m1 <- lm(he$QTY~he$SALEDAY)
-plot(he$QTY~he$SALEDAY)
-abline(m1, col='blue')
-
-m1 <- lm(he$QTY~he$SALEDAY)
-summary(m1)
-
-
-
-plot(fr$QTY~fr$MAXTEMP)
-abline(m2, col='blue')
-
-m2 <- lm(fr$QTY~fr$MAXTEMP)
-summary(m2)
-
-m3_1 <- lm(te$QTY~te$MAXTEMP)
-summary(m3_1)
-
-plot(te$QTY~te$MAXTEMP)
-abline(m2, col='blue')
-
-m3_2 <- lm(te$QTY~te$SALEDAY)
-summary(m3_2)
