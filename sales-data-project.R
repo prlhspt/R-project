@@ -1,11 +1,12 @@
-setwd("D:/workspace/r/Rdata")
+
+setwd("C:\Users\LimHyunSeok\Documents\workspace\R-project\Rdata")
 data=read.csv("sales_data_new.csv")
 class(data)
 he <- data[1:60,]
 fr <- data[61:120,]
 te <- data[121:180,]
 
-#ì´ìƒì¹˜ ì œê±°
+#ÀÌ»óÄ¡ Á¦°Å
 he <- he[-c(22,54,39,45,48,37),]
 te <- te[-c(42,45,52),]
 
@@ -144,7 +145,7 @@ he <- data[1:60,]
 fr <- data[61:120,]
 te <- data[121:180,]
 
-#ì´ìƒì¹˜ ì œê±°
+#ÀÌ»óÄ¡ Á¦°Å
 he <- he[-c(22,54,39,45,48,37),]
 te <- te[-c(41,44,51),]
 
