@@ -5,6 +5,12 @@ he <- data[1:60,]
 fr <- data[61:120,]
 te <- data[121:180,]
 
+#이상치 제거
+he <- he[-c(22,54,39,45,48,37),]
+te <- te[-c(42,45,52),]
+
+View(he)
+
 shapiro.test(health$PRICE)
 shapiro.test(health$YM)
 shapiro.test(health$ITEM_CNT)
@@ -32,7 +38,8 @@ shapiro.test(tea$SALEDAY)
 shapiro.test(tea$RAIN_DAY)
 shapiro.test(tea$HOLIDAY)
 
-vars <- c("QTY", "YM", "ITEM_CNT", "PRICE", "MAXTEMP", "SALEDAY","RAIN_DAY","HOLIDAY")
+vars <- c("QTY", "ITEM_CNT", "PRICE", "MAXTEMP", "SALEDAY","RAIN_DAY","HOLIDAY")
+vars2 <- c("ITEM_CNT", "PRICE", "MAXTEMP", "SALEDAY","RAIN_DAY","HOLIDAY")
 he <- he[,vars]
 he
 health$PRICE
@@ -49,9 +56,9 @@ plot(health$QTY~health$HOLIDAY)
 install.packages("corrplot")
 library(corrplot)
 
-health_cor <- cor(he[, 5:10])
-fruit_cor <- cor(fr[, 5:10])
-tea_cor <- cor(te[, 5:10])
+health_cor <- cor(he[, vars])
+fruit_cor <- cor(fr[, vars])
+tea_cor <- cor(te[, vars])
 
 pairs(health_cor, panel=panel.smooth)
 corrplot(health_cor, method="number")
@@ -82,6 +89,8 @@ summary(lm.fit2)
 lm.yhat2 <- predict(lm.fit2, newdata=he_test)
 sqrt(mean((lm.yhat2-he_test$QTY)^2))
 
+
+
 library(randomForest)
 set.seed(1)
 rf.fit <- randomForest(QTY~., data=he_train, mtry=6, importance=T)
@@ -100,8 +109,8 @@ plot(leaps, scale="adjr2")
 cor(he$QTY, he$SALEDAY)
 cor(he$QTY, he$PRICE)
 
-lm(he$QTY~he$SALEDAY)
-
+lm(QTY~vars2, data=he)
+vars2
 m1 <- lm(he$QTY~he$SALEDAY)
 plot(he$QTY~he$SALEDAY)
 abline(m1, col='blue')
@@ -120,8 +129,53 @@ summary(m2)
 m3_1 <- lm(te$QTY~te$MAXTEMP)
 summary(m3_1)
 
-plot(te$QTY~te$MAXTEMP)
+plot(te$QTY~te$.)
 abline(m2, col='blue')
 
 m3_2 <- lm(te$QTY~te$SALEDAY)
 summary(m3_2)
+he[,vars]
+
+
+
+# ---------------------------------
+
+he <- data[1:60,]
+fr <- data[61:120,]
+te <- data[121:180,]
+
+#이상치 제거
+he <- he[-c(22,54,39,45,48,37),]
+te <- te[-c(41,44,51),]
+
+vars <- c("QTY", "ITEM_CNT", "PRICE", "MAXTEMP", "SALEDAY","RAIN_DAY","HOLIDAY")
+m1 = lm(QTY~., data=he[,vars])
+summary(m1)
+
+m1.fit <- step(m1,method="both")
+summary(m1.fit)
+plot(QTY~.,data=he)
+he
+he
+he_cor <- cor(he[, vars])
+he_cor
+m1_cor <- cor(he[, vars])
+corrplot(health_cor, method="number")
+
+vars <- c("QTY", "ITEM_CNT", "PRICE", "MAXTEMP", "SALEDAY","RAIN_DAY","HOLIDAY")
+m2 = lm(QTY~., data=fr[,vars])
+summary(m2)
+
+vars <- c("QTY", "ITEM_CNT", "MAXTEMP", "SALEDAY","RAIN_DAY","HOLIDAY")
+m3 = lm(QTY~., data=te[,vars])
+summary(m3)
+
+
+fruit_cor <- cor(fr[, vars])
+tea_cor <- cor(te[, vars])
+
+pairs(fruit_cor, panel=panel.smooth)
+corrplot(fruit_cor, method="number")
+
+pairs(tea_cor, panel=panel.smooth)
+corrplot(tea_cor, method="number")
